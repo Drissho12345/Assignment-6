@@ -1,13 +1,16 @@
-const discussContainer = async() =>{
-    const res =await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
+const discussContainer = async(searchText,isloading) =>{
+    const res =await fetch(` https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data =await res.json();
     // console.log(data);
     const allData = data.posts;
     // console.log(allData);
-    discussCard(allData);
+    discussCard(allData,isloading);
 }
 const discussCard = (allData) =>{
-    const cardData = document.getElementById('discussContainer');
+    const cardData = document.getElementById('discuss-container');
+
+    cardData.textContent = ''; 
+
     allData.forEach(singleData => {
         // console.log(singleData)
         // creat a div
@@ -62,6 +65,7 @@ const discussCard = (allData) =>{
         cardData.appendChild(div)
         
     });
+    toggleloadingSpinner(false);
 }
 
 
@@ -72,7 +76,7 @@ const latestPostContainer = async() =>{
   const data =await res.json();
   // console.log(data);
   const allData2 = data;
-  console.log(allData2);
+  // console.log(allData2);
   postContent(allData2);
 }
 
@@ -87,7 +91,7 @@ const postContent = (allData2) =>{
                 <div class="card-body">
                     <div class="flex gap-3">
                         <img class="" src="images/Frame.svg" alt="">
-                        <p class="text-[#12132D99] font-bold text-[18px]">${postData.author.posted_date}</p>
+                        <p class="text-[#12132D99] font-bold text-[18px]">${postData.author.posted_date ? postData.author.posted_date : 'No Publish Date'}</p>
                     </div>
                   <h2 class="card-title text-[#12132D]">${postData.title}</h2>
                   <p class="text-[#12132D99] text-[16px]">${postData.description}</p>
@@ -96,7 +100,7 @@ const postContent = (allData2) =>{
                         <img class=" h-11 w-11 rounded-[50%]" src="${postData.profile_image}" alt="">
                     </div>
                     <div>
-                        <p class="text-[#12132D] font-bold text-[16px]">${postData.author.designation}</p>
+                        <p class="text-[#12132D] font-bold text-[16px]">${postData?.author?.designation || 'undefined'}</p>
                         <p class="text-[#12132D] text-[14px]">${postData.author.name}</p>
                     </div>
                   </div>
@@ -107,5 +111,28 @@ const postContent = (allData2) =>{
   
 } 
 
+const handleSearch = () => {
+  toggleloadingSpinner(true);
+  const searchField =document.getElementById('search-field');
+  const searchText = searchField.value;
+  // console.log(searchText);
+  discussContainer(searchText);
+}
+const toggleloadingSpinner = (isloading) =>{
+  const loadingSpinner = document.getElementById('loading-spinner');
+  if(isloading){
+      loadingSpinner.classList.remove('hidden');
+  }
+  else{
+      loadingSpinner.classList.add('hidden');
+  }
+}
+
+
+
+
+
+
+
 latestPostContainer()
-discussContainer()
+// discussContainer()

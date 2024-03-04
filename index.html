@@ -86,8 +86,8 @@
               <h2 class="text-6xl font-bold text-white">Welcome to the <br><span class= "text-[#797DFC]">ReTro</span> Forum</h2>
               <p class="text-xl text-white">Share your favorite opinion and win and wp <br> forum coffee mug!</p>
               <div class="bg-white flex border rounded-3xl justify-between">
-                <input class="bg-white m-4" type="text" placeholder="Search here anything...">
-                <button class="h-12 m-1 p-2 border justify-end rounded-2xl text-white bg-[#797DFC]">Buy Now</button>
+                <input id="search-field" class="bg-white m-4" type="text" placeholder="Search here anything...">
+                <button onclick="handleSearch()" class="h-12 m-1 p-2 border justify-end rounded-2xl text-white bg-[#797DFC]">Buy Now</button>
               </div>
              </div>
             </div>
@@ -120,10 +120,16 @@
         </div>
         <!-- function work start-->
         <div class="grid gap-96 grid-cols-2">
-            <div id="discussContainer">
+            <div id="loading-spinner" class="text-center my-40 hidden">
+                <span class="loading loading-spinner text-primary loading-lg"></span>
+            </div>
+
+
+            <div id="discuss-container">
                
                 
             </div>
+
             <div class="border h-[465px] mt-12 rounded-3xl bg-[#12132D0D]">
                 <div class="flex justify-between p-6">
                     <div class="mulish text-[#12132D] text-xl">Title</div>
