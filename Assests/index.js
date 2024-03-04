@@ -1,7 +1,6 @@
 const discussContainer = async(searchText,isloading) =>{
     const res =await fetch(` https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data =await res.json();
-    // console.log(data);
     const allData = data.posts;
     // console.log(allData);
     discussCard(allData,isloading);
@@ -12,7 +11,7 @@ const discussCard = (allData) =>{
     cardData.textContent = ''; 
 
     allData.forEach(singleData => {
-        // console.log(singleData)
+        console.log(singleData)
         // creat a div
         const div =document.createElement('div');
         div.classList = "mulish mt-12 grid grid-cols-2  gap-96";
@@ -21,7 +20,7 @@ const discussCard = (allData) =>{
                     <div class="p-10 w-[772px] shadow rounded-3xl bg-[#F3F3F5] border">
                       <figure class="absolute ">
                         <div class="pl-14">
-                            <div class="absolute w-[15px] rounded-2xl bg-green-600 h-[15px]"></div>
+                            <div class="absolute w-[15px] ${singleData.isActive? "bg-green-600":"bg-red-600"}  rounded-2xl  h-[15px]"></div>
                         </div>
                         <img src="${singleData.image}" class=" bg-white rounded-2xl border-red-600 h-[72px] w-[72px] "/>
                       </figure>
@@ -135,4 +134,4 @@ const toggleloading = (isloading) =>{
 
 
 latestPostContainer()
-// discussContainer()
+discussContainer()
