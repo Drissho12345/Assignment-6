@@ -65,7 +65,7 @@ const discussCard = (allData) =>{
         cardData.appendChild(div)
         
     });
-    toggleloadingSpinner(false);
+    toggleloading(false);
 }
 
 
@@ -112,13 +112,13 @@ const postContent = (allData2) =>{
 } 
 
 const handleSearch = () => {
-  toggleloadingSpinner(true);
+  toggleloading(true);
   const searchField =document.getElementById('search-field');
   const searchText = searchField.value;
   // console.log(searchText);
   discussContainer(searchText);
 }
-const toggleloadingSpinner = (isloading) =>{
+const toggleloading = (isloading) =>{
   const loadingSpinner = document.getElementById('loading-spinner');
   if(isloading){
       loadingSpinner.classList.remove('hidden');
